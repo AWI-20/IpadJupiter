@@ -7,7 +7,6 @@ dependencies:
     - requests
     - recognizers_text_suite
     - textblob
-    - collections
     - opencv-python
     - Datetime
     - tourch
