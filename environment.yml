@@ -9,7 +9,6 @@ dependencies:
     - textblob
     - collections
     - opencv-python
-    - pip
     - Datetime
     - tourch
     - parsel
