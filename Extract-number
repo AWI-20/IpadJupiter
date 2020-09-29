@@ -1,0 +1,89 @@
+import re
+import os
+import csv
+import numpy as np
+from extract_num import *
+from collections import defaultdict
+
+# # AU作者-2 TI标题-9 PY年份-33 AB摘要-34 CL通讯作者地址-41 TC被引量-43
+# f = open('data/alignment_precision500.txt','r',encoding='utf-16LE')
+
+#抽取数值函数
+def extract_num(filename,keyword):
+	#读到的行数
+	line = 0
+	#默认年份，有一部分PY字段空缺，用邻近年份填充
+	default_year = '2020'
+	f = open('data/'+filename,'r',encoding='utf-16LE')
+	index = get_index_name(filename)
+	if index not in numDict:
+		numDict[index] = defaultdict(list)
+	for i in f.readlines():
+		line += 1
+		info = i.split('\t')
+		content = info[34]
+		year = info[33]
+		if len(year) == 4:
+			default_year = year
+		numDict[index][default_year] += get_dimension_from_abstract(content,keyword)
+		print(get_dimension_from_abstract(content,keyword))
+	print(numDict)
+	f.close()
+
+#写csv
+def write_result(adict):
+	#print(adict)
+	with open('index_max.csv','a+',newline='') as f:
+		writer = csv.writer(f)
+		for key in adict:
+			row = [key]
+			for y in adict[key].keys():
+				if int(y) < 1987:
+					break
+				row.append(float(adict[key][y]))
+			writer.writerow(row)
+
+#存放数据的位置
+path = 'data/'
+fileList = os.listdir(path)
+#存每年的数据
+numDict = {}
+
+#主函数
+filenum = 0
+for filename in fileList:
+	keyword = get_keyword(filename)
+	extract_num(filename,keyword)
+	filenum += 1
+	print(filenum)
+	# if filenum > 30:
+	# 	break
+
+resDict = {}
+#去除极端值
+for key in numDict:
+	resDict[key] = defaultdict(float)
+
+for key in numDict:
+	number_list = []
+	for year in numDict[key]:
+		number_list += numDict[key][year]
+	#print(key,year,number_list)
+	if len(number_list) == 0:
+		break
+	extreme_value = get_extrme_value(number_list)
+	#print(extreme_value)
+	for year in numDict[key]:
+		normal_num_list = []
+		print(key,year)
+		for num in numDict[key][year]:
+			if num >= extreme_value[0] and num <= extreme_value[1]: 
+				normal_num_list.append(num)
+		if len(normal_num_list) > 0:
+			#resDict[key][year] = round(np.mean(normal_num_list),2)
+			resDict[key][year] = round(max(normal_num_list),2)
+		else:
+			resDict[key][year] = 0
+
+write_result(resDict)
+#print(resDict)
