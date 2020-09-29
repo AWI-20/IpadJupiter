@@ -1,8 +1,6 @@
 dependencies:
-  - python = 3
+  - python=3
   - pip:
     - numpy
     - matplotlib
     - pandas
-    - tourch
-    - parsel
