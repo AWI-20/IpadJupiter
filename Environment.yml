@@ -1,0 +1,15 @@
+dependencies:
+  - python = 3
+  - pip:
+    - numpy
+    - matplotlib
+    - pandas
+    - requests
+    - recognizers_text_suite
+    - textblob
+    - collections
+    - opencv-python
+    - pip
+    - Datetime
+    - tourch
+    - parsel
