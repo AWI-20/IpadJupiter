@@ -5,3 +5,6 @@ dependencies:
     - matplotlib
     - pandas
     - beautifulsoup4
+    - requests
+    - re
+    - bs4
