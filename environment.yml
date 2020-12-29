@@ -4,4 +4,4 @@ dependencies:
     - numpy
     - matplotlib
     - pandas
-    - beautifulsoup
+    - beautifulsoup4
