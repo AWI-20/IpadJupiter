@@ -8,5 +8,5 @@ dependencies:
     - bs4
     - requests
     - scipy
-    -U scikit-learn
+    - scikit-learn
     
