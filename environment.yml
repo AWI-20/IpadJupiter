@@ -7,4 +7,6 @@ dependencies:
     - beautifulsoup4
     - bs4
     - requests
+    - scipy
+    - -U scikit-learn
     
