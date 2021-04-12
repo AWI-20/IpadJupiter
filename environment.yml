@@ -9,4 +9,5 @@ dependencies:
     - requests
     - scipy
     - scikit-learn
-    
+    - seaborn
+    - pyecharts
