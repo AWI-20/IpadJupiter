@@ -12,3 +12,4 @@ dependencies:
     - seaborn
     - pyecharts
     - statsmodels
+    - fancyimpute
