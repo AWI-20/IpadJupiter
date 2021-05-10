@@ -13,3 +13,5 @@ dependencies:
     - pyecharts
     - statsmodels
     - fancyimpute
+    - networkx
+    - nxviz
