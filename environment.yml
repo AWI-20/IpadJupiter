@@ -16,3 +16,4 @@ dependencies:
     - networkx
     - nxviz
     - pkuseg
+    - efficient_apriori
